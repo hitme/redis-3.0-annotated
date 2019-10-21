@@ -94,6 +94,7 @@ redisClient *createClient(int fd) {
         if (server.tcpkeepalive)
             anetKeepAlive(NULL,fd,server.tcpkeepalive);
         // 绑定读事件到事件 loop （开始接收命令请求）
+        // [tzl]: reator event demultiplexer
         if (aeCreateFileEvent(server.el,fd,AE_READABLE,
             readQueryFromClient, c) == AE_ERR)
         {
